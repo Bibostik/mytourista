@@ -1,3 +1,4 @@
+<?php include 'includes/navbar.php';?>
 
 <?php
 // start session
@@ -34,4 +35,4 @@ if (!isset($_SESSION['loggedin']) || ($_SESSION['loggedin']) !== true) {
 
 
 
-
+<?php include 'includes/footer.php';?>
