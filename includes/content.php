@@ -3,97 +3,34 @@
         <div class="row">
             <div class="col">
                 <div class="d-flex justify-content-between mx-3">
-                    <h1>Featured story</h1>
-                    <a class="btn btn-primary btn-sm p-2 mb-3 fs-6">More stories</a>
+                    <h1>Latest story</h1>
+                    <a class="btn btn-primary btn p-2 mb-3 fs-6" href="storylist.php">More stories >></a>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="container stories ">
-        <div class="row m-auto">
-            <div class="col-md-3 col-sm-6 mb-5">
-                <div class="card">
-                    <img src="images/mytouristabg-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <div class="container stories">
+        <div class="row m-auto card-deck">  
+            <?php foreach ($stories as $story): ?>
+               <div class="col-12 col-md-6  col-lg-3  mb-5">
+                    <div class="card h-100" >
+                        <?php if ($story['thumbnail']): ?>
+                            <a href="story.php?id=<?php echo $story['id']; ?>"><img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>" class="card-img-top" ></a>
+                        <?php endif; ?>
+                        <div class="card-title m-2"><h5><a class="text-decoration-none" href="story.php?id=<?php echo $story['id']; ?>"><?php echo $story['title']; ?></a></h5></div>
+                        <div class="card-body">
+                            <p>by <?php echo $story['author']; ?></p>
+                            <p><?php echo $story['excerpt']; ?>...</p>
+                        </div>                    
+                        </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
-
-            </div>
-
-               <div class="col-md-3 col-sm-6 mb-5">
-                <div class="card" >
-                    <img src="images/mytouristabg-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-
-            </div>
-
-               <div class="col-md-3 col-sm-6 mb-5">
-                <div class="card" >
-                    <img src="images/mytouristabg-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-
-            </div>
-
-               <div class="col-md-3 col-sm-6 mb-5">
-                <div class="card" >
-                    <img src="images/mytouristabg-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-
-            </div>
-
-               <div class="col-md-3 col-sm-6 mb-5">
-                <div class="card">
-                    <img src="images/mytouristabg-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-
-            </div>
-
-               <div class="col-md-3 col-sm-6 mb-5">
-                <div class="card">
-                    <img src="images/mytouristabg-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-
-            </div>
-
-               <div class="col-md-3  col-sm-6 mb-5">
-                <div class="card" >
-                    <img src="images/mytouristabg-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-
-            </div>
-
-               <div class="col-md-3  col-sm-6 mb-5">
-                <div class="card" >
-                    <img src="images/mytouristabg-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-
-            </div>
-
+            
         </div>
     </div>
+    
      
 </section>
 
