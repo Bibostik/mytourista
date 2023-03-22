@@ -5,21 +5,21 @@
       <img src="images/mytouristabg-4.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption">
         <h2>My Tour Story</h2>
-        <a class="btn btn-primary mx-2 btn-sm" >Be a Part</a>
+        <a class="btn btn-primary mx-2 btn-sm type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" >Share your Tour Story</a>
       </div>
     </div>
     <div class="carousel-item">
       <img src="images/mytouristabg-2.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption ">
         <h2>Share your story</h2>
-        <a class="btn btn-primary mx-2 btn-sm" >Get started</a>
+        <a class="btn btn-primary mx-2 btn-sm type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" >Get started</a>
       </div>
     </div>
     <div class="carousel-item">
       <img src="images/mytouristabg-3.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption ">
         <h2>Tourist #1 Stop</h2>
-        <a class="btn btn-primary mx-2 btn-sm" >Learn More</a>
+        <a class="btn btn-primary mx-2 btn-sm type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" >Learn More</a>
       </div>
     </div>
     

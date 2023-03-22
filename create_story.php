@@ -1,27 +1,13 @@
 <?php
-session_start();
-
-// check if user is already logged in
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
-    // redirect to home page
-    header('location: index.php');
-    exit;
-}
-?>
-
-<!-- HTML code for the page goes here -->
-
-
-<?php
-// start the session
-session_start();
 
 // connect to the database
-$db_host = "localhost";
-$db_user = "mytouristaadmin";
-$db_pass = "CONTROLLer1000";
-$db_name = "my_touristadb";
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+
+require_once 'config.php';
+
+// check if the database connection was successful
+if (!$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
 
 // get the story data from the form
 $title = mysqli_real_escape_string($conn, $_POST['title']);
@@ -39,9 +25,15 @@ move_uploaded_file($thumbnail_tmp_name, $thumbnail_destination);
 
 // insert the story data into the database
 $query = "INSERT INTO stories (title, author, username, thumbnail, description) VALUES ('$title', '$author', '$username', '$thumbnail_destination', '$description')";
-mysqli_query($conn, $query);
+$result = mysqli_query($conn, $query);
 
-// redirect to the homepage
-header("Location: index.php");
-exit;
+if ($result) {
+    // display pop-up alert and redirect to dashboard
+    echo "<script>alert('Submission successful!'); window.location.href='dashboard.php';</script>";
+    exit;
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+
+mysqli_close($conn);
 ?>

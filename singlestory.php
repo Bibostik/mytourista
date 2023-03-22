@@ -1,3 +1,5 @@
+<?php include 'includes/navbar.php';?>
+
 <?php
 // connect to the database
 $db_host = "localhost";
@@ -27,13 +29,19 @@ if (mysqli_num_rows($result) == 0) {
 $story = mysqli_fetch_assoc($result);
 ?>
 
-<?php include 'includes/usernav.php';?>
 
 
-    <h1><?php echo $story['title']; ?></h1>
-    <p>by <?php echo $story['author']; ?></p>
-    <?php if ($story['thumbnail']): ?>
-        <img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>">
-    <?php endif; ?>
-    <p><?php echo $story['description']; ?></p>
-
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                 <h1><?php echo $story['title']; ?></h1>
+                <p>by <?php echo $story['author']; ?></p>
+                <?php if ($story['thumbnail']): ?>
+                <img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>">
+                <?php endif; ?>
+                <p><?php echo $story['description']; ?></p>
+            </div>
+        </div>
+    </div>
+   
+<?php include 'includes/footer.php';?>

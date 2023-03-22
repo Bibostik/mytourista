@@ -31,7 +31,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Login</button>
-          </form>g
+          </form>
         </div>
     </div>
 </div>
@@ -41,7 +41,7 @@
 
 
 
-<?php include '../includes/footer.php';?>
+<?php include 'includes/footer.php';?>
 
 
 

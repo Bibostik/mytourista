@@ -16,9 +16,9 @@
                <div class="col-12 col-md-6  col-lg-3  mb-5">
                     <div class="card h-100" >
                         <?php if ($story['thumbnail']): ?>
-                            <a href="story.php?id=<?php echo $story['id']; ?>"><img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>" class="card-img-top" ></a>
+                            <a href="singlestory.php?id=<?php echo $story['id']; ?>"><img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>" class="card-img-top" ></a>
                         <?php endif; ?>
-                        <div class="card-title m-2"><h5><a class="text-decoration-none" href="story.php?id=<?php echo $story['id']; ?>"><?php echo $story['title']; ?></a></h5></div>
+                        <div class="card-title m-2"><h5><a class="text-decoration-none" href="singlestory.php?id=<?php echo $story['id']; ?>"><?php echo $story['title']; ?></a></h5></div>
                         <div class="card-body">
                             <p>by <?php echo $story['author']; ?></p>
                             <p><?php echo $story['excerpt']; ?>...</p>

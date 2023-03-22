@@ -1,17 +1,9 @@
 <?php
-// set session variable on successful login
-$_SESSION['loggedin'] = true;
-var_dump($_SESSION['loggedin']);
-?>
-
-<?php
+// Start the session
+session_start();
 
 // Connect to the database
-$db_host = "localhost";
-$db_user = "mytouristaadmin";
-$db_pass = "CONTROLLer1000";
-$db_name = "my_touristadb";
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+require_once 'config.php';
 
 // Get the form data
 $email = $_POST['email'];
@@ -32,6 +24,7 @@ $user = mysqli_fetch_assoc($result);
 // Check if the user is authenticated
 if ($user) {
     // Set session variables
+    $_SESSION['loggedin'] = true;
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['user_type'] = $user_type;
     
@@ -48,10 +41,4 @@ if ($user) {
 
 // Close the database connection
 mysqli_close($conn);
-
-?>
-<?php
-// set session variable on successful login
-$_SESSION['loggedin'] = true;
-var_dump($_SESSION['loggedin']);
 ?>

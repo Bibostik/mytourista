@@ -52,6 +52,8 @@
 .footer {
   overflow: hidden;
   display: block;
+  height: 60px;
+  margin-bottom: 0;
 }
 
 label {
