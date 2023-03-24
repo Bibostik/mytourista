@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 
 
 <!-- login form -->
@@ -31,6 +32,10 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Login</button>
+
+             <?php if (!empty($error_msg)): ?>
+        <p style="color:red;"><?php echo $error_msg; ?></p>
+              <?php endif; ?>
           </form>
         </div>
     </div>

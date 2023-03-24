@@ -36,7 +36,7 @@ if ($user) {
     }
 } else {
     // If authentication fails, show an error message
-    echo "Invalid login credentials";
+    echo "<script>alert('Invalid Login Credentials!'); window.location.href='dashboard.php';</script>";
 }
 
 // Close the database connection

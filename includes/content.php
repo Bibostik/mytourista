@@ -38,7 +38,7 @@
     <div class="container-fluid">
         <div class="row bottom-banner">
             <div class="col bottom-banner text-center d-grid align-content-center justify-content-center">
-                <a class="btn btn-primary btn-sm p-2 mb-3 fs-6">Learn More</a>
+                <a class="btn btn-primary btn-sm p-2 mb-3 fs-6" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Learn More</a>
 
             </div>
         </div>

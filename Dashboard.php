@@ -12,8 +12,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 <?php include 'includes/usernav.php';?>
 
-
- <div class="container my-5">
+<div class="container my-5">
   <div class="row">
     <div class="col vh-100">
       <form id="new-story-form" method="post" action="create_story.php" enctype="multipart/form-data">
@@ -23,7 +22,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
         <div class="mb-3">
           <label for="thumbnail" class="form-label">Thumbnail:</label>
-          <input type="file" name="thumbnail" id="thumbnail" class="form-control" required>
+          <input type="file" name="thumbnail[]" id="thumbnail" class="form-control" multiple required>
+        </div>
+        <div class="mb-3">
+          <label for="images" class="form-label">Images:</label>
+          <input type="file" name="images[]" id="images" class="form-control" multiple required>
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Description:</label>
@@ -38,7 +41,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </div>
   </div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="success-modal" tabindex="-1" aria-labelledby="success-modal-label" aria-hidden="true">
   <div class="modal-dialog">
@@ -56,13 +58,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </div>
   </div>
 </div>
-
 <script>
   $(document).ready(function() {
     $("#new-story-form").submit(function(event) {
       event.preventDefault();
       var form = $(this);
       var formData = new FormData(form[0]);
+      var thumbnailSelected = false; // variable to keep track of whether a thumbnail has been selected
+      formData.getAll('thumbnail[]').forEach(function(file) {
+        if (!thumbnailSelected && file.type.startsWith('image/')) {
+          thumbnailSelected = true;
+          formData.set('thumbnail', file); // set the first image file as the thumbnail
+        } else {
+          formData.append('images[]', file); // append additional image files to the images array
+        }
+      });
+      if (!thumbnailSelected) { // check if a thumbnail has been selected
+        alert("Please select a thumbnail image.");
+        return;
+      }
       $.ajax({
         type: "POST",
         url: form.attr("action"),
@@ -72,16 +86,35 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         success: function(response) {
           // Show success modal
           $('#success-modal').modal('show');
-          // Reset form
-          form[0].reset();
-        },
-        error: function() {
-          alert("An error occurred. Please try again later.");
-        }
-      });
-    });
-  });
-</script>   
+          // Reset form                    
+            form[0].reset();
+            $('#thumbnail-preview').empty(); // remove any previously displayed thumbnail previews
+            $('#success-modal').modal('show');
+            },
+            error: function() {
+            alert("An error occurred. Please try again later.");
+            }
+            });
+            });
+            });
+
+            // Display thumbnail preview on file selection
+            $(document).on('change', '#thumbnail', function() {
+            $('#thumbnail-preview').empty();
+            var files = $('#thumbnail')[0].files;
+            if (files.length > 0) {
+            // Only display the first thumbnail as selected thumbnail
+            var thumbnail = files[0];
+            var reader = new FileReader();
+            reader.onload = function(event) {
+            $('#thumbnail-preview').append('<img class="img-thumbnail" src="' + event.target.result + '">');
+            };
+            reader.readAsDataURL(thumbnail);
+            }
+            });
+
+            </script>
+              
 
 
 

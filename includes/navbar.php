@@ -1,3 +1,4 @@
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,32 +49,43 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Register</h5>
+        <h5 class="modal-title fs-5">Register as a Storyseeker or Storyteller</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-            <form method="post" action="registerserver.php" class="my-3">
-                <label for="username">Username:</label>
-                <input class="form-control" type="text" name="username" id="username" required>
-                <br>
-                 <label for="username">Email:</label>
-                <input class="form-control" type="email" name="email" id="email" required>
-                <br>
-                <label for="password">Password:</label>
-                <input class="form-control" type="password" name="password" id="password" required>
-                <br>
-                
-                  <label for="role">I am a:</label>
-                <input class="form-check-input" type="radio" id="storyseeker" name="role" value="storyseeker" required>
-                <label for="storyseeker">Story Seeker</label>
-                <input class="form-check-input" type="radio" id="storyteller" name="role" value="storyteller" required>
-                <label for="storyteller">Storyteller</label>
-                <input type="submit" value="Register" class="btn btn-secondary">              
-            </form>
-            <span>Registered user <a href="login.php" class="link-danger text-decoration-none my-4">Login here</a></span>
-      </div>
+      <div class="modal-body">           
+
+        <div class="container">
+              <h1 class="my-3">Register</h1>        
+              <form method="post" action="register.php">
+                  <?php if (isset($error)): ?>
+                    <div class="alert alert-danger"><?php echo $error; ?></div>
+                  <?php endif; ?>
+                  <div class="mb-3">
+                      <label for="username" class="form-label">Username</label>
+                      <input type="text" class="form-control" id="username" name="username" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="email" name="email" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="password" name="password" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="role" class="form-label">Role</label>
+                      <select class="form-select" id="role" name="role" required>
+                          <option value="">Select a role</option>
+                          <option value="storyseeker">Storyseeker</option>
+                          <option value="storyteller">Storyteller</option>
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+                <p class="mt-3">Already have an account? <a href="login.php">Login</a></p>
+    
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>

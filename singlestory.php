@@ -1,12 +1,20 @@
-<?php include 'includes/navbar.php';?>
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // If not, redirect to the login page
+    header("Location: login.php");
+    exit;
+}
+?>
+
+<?php include 'includes/usernav.php';?>
 
 <?php
 // connect to the database
-$db_host = "localhost";
-$db_user = "mytouristaadmin";
-$db_pass = "CONTROLLer1000";
-$db_name = "my_touristadb";
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+require_once 'config.php';
 
 // get the story ID from the query string
 if (!isset($_GET['id'])) {
@@ -43,5 +51,8 @@ $story = mysqli_fetch_assoc($result);
             </div>
         </div>
     </div>
+
+    
+
    
 <?php include 'includes/footer.php';?>

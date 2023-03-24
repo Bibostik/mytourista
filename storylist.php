@@ -14,14 +14,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 <?php
 
 // connect to the database
-$db_host = "localhost";
-$db_user = "mytouristaadmin";
-$db_pass = "CONTROLLer1000";
-$db_name = "my_touristadb";
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+require_once 'config.php';
 // query the database for all stories
 
-$query = "SELECT id, title, author, thumbnail, description FROM stories";
+$query = "SELECT id, title, author, thumbnail, description FROM stories ORDER BY `id` DESC";
 $result = mysqli_query($conn, $query);
 
 // store the stories in an array
@@ -50,4 +46,4 @@ while ($row = mysqli_fetch_assoc($result)) {
                 </div>
             <?php endforeach; ?>
         </div>
-    </div>
+    </div>    
