@@ -1,12 +1,14 @@
 <?php
-// Database connection information
-$db_host = "localhost";
-$db_user = "mytouristaadmin";
-$db_pass = "CONTROLLer1000";
-$db_name = "my_touristadb";
+session_start();
 
-// Connect to the database
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+// Check if user is not logged in as admin
+if (!isset($_SESSION['username'])) {
+    header("Location: admin.php");
+    exit;
+}
+
+// Database connection information
+require_once 'config.php';
 
 // Check if form was submitted
 if (isset($_POST['submit'])) {
@@ -52,17 +54,17 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 ?>
 
-
-
-
 <!DOCTYPE html>
-<html>
+<?php include 'includes/admin_header.php'; ?>
+
+
+<!-- <html>
 <head>
     <title>Edit Story</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-</head>
+</head> -->
 <body>
     <div class="container my-5">
         <h1 class="mb-3">Edit Story</h1>
@@ -82,9 +84,8 @@ $row = mysqli_fetch_assoc($result);
             </div>
             <div class="mb-3">
                 <label for="thumbnail" class="form-label">Thumbnail:</label>
-                <img src="thumbnails/<?php echo $row['thumbnail']; ?>" class="img-thumbnail mb-3">
-                <img src="thumbnails/<?php echo $row['thumbnail']; ?>?t=<?php echo time(); ?>" alt="Thumbnail">
-                <img src="thumbnails/<?php echo $row['thumbnail']; ?>" alt="<?php echo $row['title']; ?>" class="img-thumbnail mb-3">
+                
+                <img src="<?php echo $row['thumbnail']; ?>?t=<?php echo time(); ?>" alt="<?php echo $row['title']; ?>" class="img-thumbnail mb-3">
 
 
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail">

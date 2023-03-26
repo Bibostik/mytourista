@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-
-<?php include 'includes/admin_header.php'; ?>
-
 <?php
 session_start();
 
@@ -11,6 +7,62 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
+?>
+<!DOCTYPE html>
+
+<?php include 'includes/admin_header.php'; ?>
+
+<div class="container">
+        <h1>Storyteller and Storyseeker Statistics</h1>
+        <hr>
+
+        <?php
+            // Connect to the database
+            $db_host = "localhost";
+            $db_user = "mytouristaadmin";
+            $db_pass = "CONTROLLer1000";
+            $db_name = "my_touristadb";
+            $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+
+            // Check for errors
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+
+            // Query the database for storyteller statistics
+            $query = "SELECT COUNT(*) AS num_stories, username FROM stories GROUP BY username";
+            $result = mysqli_query($conn, $query);
+
+            // Display the results in a table
+            echo "<h2>Storytellers</h2>";
+            echo "<table class='table'>";
+            echo "<thead><tr><th>Username</th><th>Number of Stories</th></tr></thead>";
+            echo "<tbody>";
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr><td>{$row['username']}</td><td>{$row['num_stories']}</td></tr>";
+            }
+            echo "</tbody></table>";
+
+            // Query the database for storyseeker statistics
+            $query = "SELECT COUNT(*) AS num_stories, username FROM stories GROUP BY username";
+            $result = mysqli_query($conn, $query);
+
+            // Display the results in a table
+            echo "<h2>Storyseekers</h2>";
+            echo "<table class='table'>";
+            echo "<thead><tr><th>Username</th><th>Number of Stories</th></tr></thead>";
+            echo "<tbody>";
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr><td>{$row['username']}</td><td>{$row['num_stories']}</td></tr>";
+            }
+            echo "</tbody></table>";
+
+            // Close the database connection
+            mysqli_close($conn);
+        ?>
+
+</div>
+<?php 
 
 // Database connection information
 require_once 'config.php';
@@ -25,8 +77,6 @@ $sql = "SELECT stories.id, stories.title, stories.author, stories.description, s
 $result = mysqli_query($conn, $sql);
 
 ?>
-
-
     <div class="container my-4">
         <h1>Admin Panel</h1>
         <table class="table table-striped table-bordered">
@@ -67,7 +117,14 @@ $result = mysqli_query($conn, $sql);
                 <?php endwhile; ?>
             </tbody>
         </table>
+
+       
     </div>
+
+     
+
+    
+
 
 
 <?php include 'includes/admin_footer.php';?>

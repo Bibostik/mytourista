@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+
 // Start session
 session_start();
 
@@ -8,6 +8,7 @@ if (isset($_SESSION['username'])) {
     header("Location: admin.php");
     exit();
 }
+require_once 'config.php';
 
 // Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
