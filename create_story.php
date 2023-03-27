@@ -13,7 +13,7 @@ if (!$conn) {
 $title = mysqli_real_escape_string($conn, $_POST['title']);
 $author = mysqli_real_escape_string($conn, $_POST['author']);
 $username = mysqli_real_escape_string($conn, $_POST['username']);
-
+$username = $_SESSION['username'];
 $description = mysqli_real_escape_string($conn, $_POST['description']);
 
 // move the thumbnail file to a directory on the server

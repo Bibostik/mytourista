@@ -1,5 +1,6 @@
 
-<!DOCTYPE html>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,66 +11,59 @@
     <link rel="stylesheet" href="css/main.css">
 
    
-
-<!-- Use the $story variable to set the page title -->
-
 <title>User Area</title> 
     
 </head>
 <body>
 <section>
  
-<?php
-$user_id = $_SESSION['user_id'];
-
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['user_type']) && ($_SESSION['user_type'] == 'storyseeker' || $_SESSION['user_type'] == 'storyteller')) {
-    // User is logged in as either a storyseeker or storyteller
-    // Get user information from the database
-    include('config.php');
-    $user_id = $_SESSION['user_id'];
-    $query = "SELECT user_id, username FROM storytellers WHERE user_id = '$user_id' ";
-    $result = mysqli_query($conn, $query);
-    if (mysqli_num_rows($result) > 0) {
-        $user = mysqli_fetch_assoc($result);
-        
-        echo isset($user['username']) ? $user['username'] : '';
-    }
-
-    $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
-
-}
-
-
-
-?>
-
 <section>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">MyTourista</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['user_type']) && ($_SESSION['user_type'] == 'storyseeker' || $_SESSION['user_type'] == 'storyteller')) { ?>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Logged in as <?php $user = mysqli_fetch_assoc($result); var_dump($user); echo isset($user['username']) ? $user['username'] : ''; ?>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                        </ul>
-                    </li>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MyTourista</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Storyseeker</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">Storyteller</a>
+                        </li>                       
+                        <li class="nav-item">
+                        <a class="nav-link" href="storylist.php">Explore Stories</a>
+                        </li>
+                    </ul>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <?php 
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['user_type']) && ($_SESSION['user_type'] == 'storyseeker' || $_SESSION['user_type'] == 'storyteller')) {
+    if(isset($username)) {
+?>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Welcome <?php echo $username; ?>!
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                 </ul>
-                <?php } ?>
-            </div>
+            </li>
+        </ul>
+<?php
+    } else {
+        echo "User not found.";
+    }
+}
+?>
         </div>
-    </nav>
+    </div>
+</nav>
+
 </section>
 
-
-    </section>
 
 
 

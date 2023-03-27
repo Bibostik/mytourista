@@ -29,14 +29,16 @@
                         <a class="nav-link" href="#">Storyteller</a>
                         </li>                       
                         <li class="nav-item">
-                        <a class="nav-link" href="storylist.php">Storylist</a>
+                        <a class="nav-link" href="storylist.php">Explore Stories</a>
                         </li>
                     </ul>
 
                     <button class="btn btn-primary mx-2 btn-sm" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Get started</button>
-                    <form class="d-flex space-between" role="search">
+                    <a data-bs-toggle="modal" data-bs-target="#searchmodal">
+                      <form class="d-flex space-between" role="search">
                         <i class="bi bi-search mx-auto bg-primary px-2 py-1 text-white rounded-1 align-self-center"></i>
-                    </form>          
+                    </form> 
+                    </a>         
 
 
 
@@ -45,16 +47,16 @@
     </section>
 
     <section>
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog" >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fs-5">Register as a Storyseeker or Storyteller</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">           
+      <div class="modal" id="exampleModal" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fs-5">Register as a Storyseeker or Storyteller</h5>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">           
 
         <div class="container">
               <h1 class="my-3">Register</h1>        
@@ -93,6 +95,57 @@
     </div>
   </div>
 </div>
+</section>
+
+
+
+ <section>
+      <div class="modal" id="searchmodal" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fs-5">Use a Search Term, Location or Category</h5>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">           
+
+        <div class="container">
+              <form method="get" action="search.php">
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <input type="text" name="query" class="form-control" placeholder="Search...">
+        </div>
+        <div class="col-md-4">
+            <select name="category" class="form-control">
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Nature">Nature</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Culture">Culture</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <input type="text" name="location" class="form-control" placeholder="Location">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" name="search" class="btn btn-primary mb-3">Search</button>
+        </div>
+    </div>
+</form>
+    
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+   
 </section>
 
 

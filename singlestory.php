@@ -1,4 +1,5 @@
 <?php
+
 // Start the session
 session_start();
 
@@ -8,6 +9,44 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
     exit;
 }
+
+// connect to the database
+require_once 'config.php';
+
+$user_id = $_SESSION['username'];
+$user_type = $_SESSION['user_type'];
+
+if ($user_type === 'storyseeker') {
+    $table_name = 'storyseekers';
+} elseif ($user_type === 'storyteller') {
+    $table_name = 'storytellers';
+}
+
+// Retrieve the user's information from the database
+$query = "SELECT username FROM $table_name WHERE user_id = '$user_id'";
+$result = mysqli_query($conn, $query);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $username = $row['username'];
+}
+
+// Retrieve the stories created by the user from the database
+$sql = "SELECT * FROM stories WHERE id = $user_id";
+$result = mysqli_query($conn, $sql);
+
+// Initialize an empty array to store the user's stories
+$stories = array();
+
+// Check if the query was successful and if there are results
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $stories[] = $row;
+    }
+}
+
+
+
 ?>
 
 <?php include 'includes/usernav.php';?>

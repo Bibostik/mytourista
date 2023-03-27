@@ -37,6 +37,9 @@
   display: flex;
   margin: 0 auto;
 }
+.pointer {
+  cursor: pointer;
+}
 .bottom-banner {
   height: 300px;
   max-height: 300px;
@@ -50,9 +53,7 @@
 }
 
 .footer {
-  overflow: hidden;
-  display: block;
-  height: 60px;
+  height: auto;
   margin-bottom: 0;
 }
 

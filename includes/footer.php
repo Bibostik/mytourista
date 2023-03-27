@@ -1,17 +1,43 @@
-<section class="footer bg-dark my-0 d-flex justify-content-center p-3">
-    <div>
-        <div class="container text-center">
-            <div class="row">
-                <div class="col d-flex align-items-center">
-                    <p class="text-white copyright">Copyright © 2023 MyTourista. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-start " id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/mytourista">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="storylist.php">Storylist</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.php">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.php">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Terms and Conditions</a>
+        </li>
+      </ul>
     </div>
-</section>
+    <div class="d-flex justify-content-center align-items-center ">
+      <p class="text-white my-2 me-3">© 2023 MyTourista. All rights reserved.</p>
+    </div>
+  </div>
+</nav>
 
 
 
-<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
+
+
+
+        <!-- JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+ 
+    </body>
 </html>

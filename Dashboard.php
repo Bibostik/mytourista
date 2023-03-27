@@ -1,4 +1,5 @@
 <?php
+
 // Start the session
 session_start();
 
@@ -9,58 +10,48 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-
-// Include database configuration
+// connect to the database
 require_once 'config.php';
 
+$user_id = $_SESSION['username'];
+$user_type = $_SESSION['user_type'];
 
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+if ($user_type === 'storyseeker') {
+    $table_name = 'storyseekers';
+} elseif ($user_type === 'storyteller') {
+    $table_name = 'storytellers';
 }
 
+// Retrieve the user's information from the database
+$query = "SELECT username FROM $table_name WHERE user_id = '$user_id'";
+$result = mysqli_query($conn, $query);
 
-/// check if user is logged in
-
-  // get user type
-
-
-if (isset($_SESSION['user_id'])) {
-  
-  $user_id = $_SESSION['user_id'];
-  $query_storyteller = "SELECT * FROM storytellers WHERE user_id = '$user_id'";
-  $query_storyseeker = "SELECT * FROM storyseekers WHERE user_id = '$user_id'";
-  $result_storyteller = mysqli_query($conn, $query_storyteller);
-  $result_storyseeker = mysqli_query($conn, $query_storyseeker);
-  $row = mysqli_fetch_assoc($result_storyteller);
-  $username = $row['username'];
-
-  
-  if(mysqli_num_rows($result_storyteller) > 0 ) { // if user is a storyteller
-   
-    echo "Logged in as storyteller: " . $username;
-  } elseif(mysqli_num_rows($result_storyseeker) > 0) { // if user is a storyseeker
-    $row = mysqli_fetch_assoc($result_storyseeker);
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
     $username = $row['username'];
-    echo "Logged in as storyseeker: " . $username;
-  } else { // invalid user
-    echo "Invalid user.";
-  }
-
-} else {
-  echo "You are not logged in.";
-  
 }
 
+// Retrieve the stories created by the user from the database
+$sql = "SELECT * FROM stories WHERE id = $user_id";
+$result = mysqli_query($conn, $sql);
 
+// Initialize an empty array to store the user's stories
+$stories = array();
 
-mysqli_close($conn); // close database connection
+// Check if the query was successful and if there are results
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $stories[] = $row;
+    }
+}
 
-
+// Close the connection
+mysqli_close($conn);
 
 ?>
 
 
-
+<!DOCTYPE html>
 <?php include 'includes/usernav.php';?>
 
 
@@ -87,6 +78,9 @@ mysqli_close($conn); // close database connection
           <label for="description" class="form-label">Description:</label>
           <textarea name="description" id="description" class="form-control" required></textarea>
         </div>
+
+
+ 
         <div class="mb-3">
           <label for="author" class="form-label">Author:</label>
           <input type="text" id="author" name="author" class="form-control"><br>
@@ -152,62 +146,7 @@ mysqli_close($conn); // close database connection
 
 
 
-<script>
-  $(document).ready(function() {
-    $("#new-story-form").submit(function(event) {
-      event.preventDefault();
-      var form = $(this);
-      var formData = new FormData(form[0]);
-      var thumbnailSelected = false; // variable to keep track of whether a thumbnail has been selected
-      formData.getAll('thumbnail[]').forEach(function(file) {
-        if (!thumbnailSelected && file.type.startsWith('image/')) {
-          thumbnailSelected = true;
-          formData.set('thumbnail', file); // set the first image file as the thumbnail
-        } else {
-          formData.append('images[]', file); // append additional image files to the images array
-        }
-      });
-      if (!thumbnailSelected) { // check if a thumbnail has been selected
-        alert("Please select a thumbnail image.");
-        return;
-      }
-      $.ajax({
-        type: "POST",
-        url: form.attr("action"),
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          // Show success modal
-          $('#success-modal').modal('show');
-          // Reset form                    
-            form[0].reset();
-            $('#thumbnail-preview').empty(); // remove any previously displayed thumbnail previews
-            $('#success-modal').modal('show');
-            },
-            error: function() {
-            alert("An error occurred. Please try again later.");
-            }
-            });
-            });
-            });
 
-            // Display thumbnail preview on file selection
-            $(document).on('change', '#thumbnail', function() {
-            $('#thumbnail-preview').empty();
-            var files = $('#thumbnail')[0].files;
-            if (files.length > 0) {
-            // Only display the first thumbnail as selected thumbnail
-            var thumbnail = files[0];
-            var reader = new FileReader();
-            reader.onload = function(event) {
-            $('#thumbnail-preview').append('<img class="img-thumbnail" src="' + event.target.result + '">');
-            };
-            reader.readAsDataURL(thumbnail);
-            }
-            });
-
-            </script>
               
 
 

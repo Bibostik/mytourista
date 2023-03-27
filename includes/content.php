@@ -10,25 +10,34 @@
         </div>
     </div>
     
-    <div class="container stories">
-        <div class="row m-auto card-deck">  
-            <?php foreach ($stories as $story): ?>
-               <div class="col-12 col-md-6  col-lg-3  mb-5">
-                    <div class="card h-100" >
-                        <?php if ($story['thumbnail']): ?>
-                            <a href="singlestory.php?id=<?php echo $story['id']; ?>"><img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>" class="card-img-top" ></a>
-                        <?php endif; ?>
-                        <div class="card-title m-2"><h5><a class="text-decoration-none" href="singlestory.php?id=<?php echo $story['id']; ?>"><?php echo $story['title']; ?></a></h5></div>
-                        <div class="card-body">
-                            <p>by <?php echo $story['author']; ?></p>
-                            <p><?php echo $story['excerpt']; ?>...</p>
-                        </div>                    
+   <div class="container">
+    <div class="row">
+        <?php foreach ($stories as $story): ?>
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+            <div class="card h-100">
+                <?php if ($story['thumbnail']): ?>
+                <a href="singlestory.php?id=<?php echo $story['id']; ?>"><img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>" class="card-img-top"></a>
+                <?php endif; ?>
+                <div class="card-body">
+                    <h5 class="card-title"><a class="text-decoration-none" href="singlestory.php?id=<?php echo $story['id']; ?>"><?php echo $story['title']; ?></a></h5>
+                    <p class="card-text">by <?php echo $story['author']; ?></p>
+                    <p class="card-text"><?php echo $story['excerpt']; ?>...</p>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('http://mytourista.smatstores.com/singlestory.php?id=' . $story['id']); ?>" class="btn btn-sm btn-facebook" target="_blank"><i class="fab fa-facebook"></i> Share</a>
+                            <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('http://mytourista.smatstores.com/singlestory.php?id=' . $story['id']); ?>&text=<?php echo urlencode($story['title']); ?>" class="btn btn-sm btn-twitter" target="_blank"><i class="fab fa-twitter"></i> Tweet</a>
+                            
                         </div>
                     </div>
-                    <?php endforeach; ?>
                 </div>
-            
+            </div>
         </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
     </div>
     
      
