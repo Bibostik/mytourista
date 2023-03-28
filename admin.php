@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
 
         <?php
             // Connect to the database
-          require_once 'config.php';
+          
             $db_host = "localhost";
             $db_user = "mytouristaadmin";
             $db_pass = "CONTROLLer#1000";
