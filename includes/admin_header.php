@@ -16,6 +16,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="admin.php">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.php">MyTourista</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">

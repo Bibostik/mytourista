@@ -23,10 +23,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Storyseeker</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="#">Storyteller</a>
+                        <a class="nav-link" href="about.php">About</a>
                         </li>                       
                         <li class="nav-item">
                         <a class="nav-link" href="storylist.php">Explore Stories</a>
@@ -130,7 +130,7 @@
             <input type="text" name="location" class="form-control" placeholder="Location">
         </div>
         <div class="col-md-2">
-            <button type="submit" name="search" class="btn btn-primary mb-3">Search</button>
+            <button type="submit" name="query" class="btn btn-primary mb-3">Search</button>
         </div>
     </div>
 </form>

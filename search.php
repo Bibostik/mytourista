@@ -39,7 +39,9 @@ if (isset($_GET['search'])) {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
+<?php include 'includes/navbar.php';?> 
 
 <!-- display the search results -->
 <div class="container">
@@ -54,7 +56,7 @@ if (isset($_GET['search'])) {
                     <h3><?php echo $story['title']; ?></h3>
                     <p><strong>Author:</strong> <?php echo $story['author']; ?></p>
                     <p><?php echo $story['description']; ?></p>
-                    <a href="story.php?id=<?php echo $story['id']; ?>" class="btn btn-primary">Read More</a>
+                    <a href="singlestory.php?id=<?php echo $story['id']; ?>" class="btn btn-primary">Read More</a>
                 </div>
             </div>
             <hr>
@@ -80,3 +82,4 @@ if (isset($_GET['search'])) {
         <p>No results found.</p>
     <?php endif; ?>
 </div>
+<?php include 'includes/footer.php';?>

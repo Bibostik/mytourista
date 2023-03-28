@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<?php include 'includes/navbar.php';?>
+<?php include 'includes/admin_header.php';?>
     <div class="container-fluid bg-secondary py-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-4 loginform text-white py-5 rounded-3">

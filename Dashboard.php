@@ -64,6 +64,8 @@ mysqli_close($conn);
 
 
 <!DOCTYPE html>
+<html lang="en">
+
 <?php include 'includes/usernav.php';?>
 
 <div class="container my-5">
@@ -151,9 +153,5 @@ mysqli_close($conn);
             </tr>
           <?php endforeach; ?>
         </tbody>
-      </table>          
-
-
-
-
+      </table>   
 <?php include 'includes/footer.php';?>
