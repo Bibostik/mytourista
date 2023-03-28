@@ -12,8 +12,7 @@ if (!$conn) {
 // get the story data from the form
 $title = mysqli_real_escape_string($conn, $_POST['title']);
 $author = mysqli_real_escape_string($conn, $_POST['author']);
-$username = mysqli_real_escape_string($conn, $_POST['username']);
-$username = $_SESSION['username'];
+$username = mysqli_real_escape_string($conn, $_SESSION['username']); // use the session variable here
 $description = mysqli_real_escape_string($conn, $_POST['description']);
 
 // move the thumbnail file to a directory on the server
@@ -44,7 +43,8 @@ if (empty($_POST['selected_thumbnail'])) {
 }
 
 // insert the story data into the database
-$query = "INSERT INTO stories (title, author, username, thumbnail, thumbnail_extension, thumbnail_new_name, description) VALUES ('$title', '$author', '$username', '$selected_thumbnail', '{$thumbnail_extensions[array_search(pathinfo($selected_thumbnail, PATHINFO_EXTENSION), $thumbnail_extensions)]}', '{$thumbnail_new_names[array_search(pathinfo($selected_thumbnail, PATHINFO_EXTENSION), $thumbnail_extensions)]}', '$description')";
+$query = "INSERT INTO stories (title, author, username, thumbnail, thumbnail_extension, thumbnail_new_name, description, location, category) VALUES ('$title', '$author', '$username', '$selected_thumbnail', '{$thumbnail_extensions[array_search(pathinfo($selected_thumbnail, PATHINFO_EXTENSION), $thumbnail_extensions)]}', '{$thumbnail_new_names[array_search(pathinfo($selected_thumbnail, PATHINFO_EXTENSION), $thumbnail_extensions)]}', '$description', '$location', '$category')";
+
 $result = mysqli_query($conn, $query);
 
 if ($result) {

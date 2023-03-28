@@ -59,7 +59,7 @@
             <div class="modal-body">           
 
         <div class="container">
-              <h1 class="my-3">Register</h1>        
+                  
               <form method="post" action="register.php">
                   <?php if (isset($error)): ?>
                     <div class="alert alert-danger"><?php echo $error; ?></div>

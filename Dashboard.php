@@ -1,3 +1,8 @@
+
+
+
+
+
 <?php
 
 // Start the session
@@ -13,7 +18,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 // connect to the database
 require_once 'config.php';
 
-$user_id = $_SESSION['username'];
+$username = $_SESSION['username'];
 $user_type = $_SESSION['user_type'];
 
 if ($user_type === 'storyseeker') {
@@ -21,19 +26,25 @@ if ($user_type === 'storyseeker') {
 } elseif ($user_type === 'storyteller') {
     $table_name = 'storytellers';
 }
-
 // Retrieve the user's information from the database
-$query = "SELECT username FROM $table_name WHERE user_id = '$user_id'";
-$result = mysqli_query($conn, $query);
+$query = "SELECT * FROM $table_name WHERE username = ?";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "s", $username);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
-    $username = $row['username'];
+
 }
 
+
 // Retrieve the stories created by the user from the database
-$sql = "SELECT * FROM stories WHERE id = $user_id";
-$result = mysqli_query($conn, $sql);
+$sql = "SELECT * FROM stories WHERE username = ?";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "s", $username);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 // Initialize an empty array to store the user's stories
 $stories = array();
@@ -51,10 +62,9 @@ mysqli_close($conn);
 ?>
 
 
+
 <!DOCTYPE html>
 <?php include 'includes/usernav.php';?>
-
-
 
 <div class="container my-5">
   <div class="row">
@@ -111,7 +121,7 @@ mysqli_close($conn);
 
 <div class="container my-5">
   <div class="row">
-    <div class="col vh-100">
+    <div class="col">
       <h2>Your Stories</h2>
       <table class="table">
         <thead>
@@ -141,13 +151,7 @@ mysqli_close($conn);
             </tr>
           <?php endforeach; ?>
         </tbody>
-      </table>
-      
-
-
-
-
-              
+      </table>          
 
 
 

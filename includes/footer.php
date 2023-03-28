@@ -19,7 +19,7 @@
           <a class="nav-link" href="about.php">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Terms and Conditions</a>
+          <a class="nav-link" href="terms_conditions.php">Terms and Conditions</a>
         </li>
       </ul>
     </div>

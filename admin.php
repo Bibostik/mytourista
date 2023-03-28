@@ -18,11 +18,7 @@ if (!isset($_SESSION['username'])) {
 
         <?php
             // Connect to the database
-            $db_host = "localhost";
-            $db_user = "mytouristaadmin";
-            $db_pass = "CONTROLLer1000";
-            $db_name = "my_touristadb";
-            $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+          require_once 'config.php';
 
             // Check for errors
             if (!$conn) {

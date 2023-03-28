@@ -25,7 +25,7 @@ $user = mysqli_fetch_assoc($result);
 if ($user) {
     // Set session variables
     $_SESSION['loggedin'] = true;
-    $_SESSION['username'] = $user['user_id'];
+    $_SESSION['username'] = $user['username'];
     $_SESSION['user_type'] = $user_type;
     
     // Redirect the user to the appropriate page
