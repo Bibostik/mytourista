@@ -6,7 +6,7 @@
 require_once 'config.php';
 
 // query the database for the latest stories
-$query = "SELECT id, title, author, thumbnail, description FROM stories ORDER BY id DESC LIMIT 8";
+$query = "SELECT * FROM stories ORDER BY id DESC LIMIT 8";
 $result = mysqli_query($conn, $query);
 
 // store the stories in an array

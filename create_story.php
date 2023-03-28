@@ -14,6 +14,8 @@ $title = mysqli_real_escape_string($conn, $_POST['title']);
 $author = mysqli_real_escape_string($conn, $_POST['author']);
 $username = mysqli_real_escape_string($conn, $_SESSION['username']); // use the session variable here
 $description = mysqli_real_escape_string($conn, $_POST['description']);
+$category = mysqli_real_escape_string($conn, $_POST['category']);
+$location = mysqli_real_escape_string($conn, $_POST['location']);
 
 // move the thumbnail file to a directory on the server
 $thumbnail_names = $_FILES['thumbnail']['name'];

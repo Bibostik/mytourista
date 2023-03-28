@@ -64,13 +64,11 @@ mysqli_close($conn);
 
 
 <!DOCTYPE html>
-<html lang="en">
 
 <?php include 'includes/usernav.php';?>
-
 <div class="container my-5">
   <div class="row">
-    <div class="col vh-100">
+    <div class="col-lg-8 mx-auto">
       <form id="new-story-form" method="post" action="create_story.php" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="title" class="form-label">Title:</label>
@@ -84,24 +82,37 @@ mysqli_close($conn);
           <label for="images" class="form-label">Images:</label>
           <input type="file" name="images[]" id="images" class="form-control" multiple required>
         </div>
-         
-        
         <div class="mb-3">
           <label for="description" class="form-label">Description:</label>
           <textarea name="description" id="description" class="form-control" required></textarea>
         </div>
-
-
- 
+        <div class="mb-3">
+          <label for="location" class="form-label">Location:</label>
+          <input type="text" name="location" id="location" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Category:</label>
+          <select name="category" id="category" class="form-control">
+            <option value="">Select Category</option>
+            <option value="travel">Nature</option>
+            <option value="food">Food</option>
+            <option value="lifestyle">Adventure</option>
+            <option value="technology">Technology</option>
+            <option value="technology">Culture</option>
+          </select>
+        </div>
         <div class="mb-3">
           <label for="author" class="form-label">Author:</label>
-          <input type="text" id="author" name="author" class="form-control"><br>
+          <input type="text" name="author" id="author" class="form-control">
         </div>
-        <input type="submit" name="submit" value="Create Story" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#success-modal">
+        <div class="d-grid gap-2">
+          <button type="submit" name="submit" class="btn btn-primary">Create Story</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="success-modal" tabindex="-1" aria-labelledby="success-modal-label" aria-hidden="true">
   <div class="modal-dialog">
@@ -142,16 +153,22 @@ mysqli_close($conn);
               <td><?php echo $story['description']; ?></td>
               <td><img src="<?php echo $story['thumbnail']; ?>" alt="Thumbnail" width="100"></td>
               <td>
-                <?php foreach (explode(',', $story['images']) as $image): ?>
-                  <img src="<?php echo $image; ?>" alt="Image" width="100">
-                <?php endforeach; ?>
+                <?php if (isset($story['images'])): ?>
+                  <?php foreach (explode(',', $story['images']) as $image): ?>
+                    <img src="<?php echo $image; ?>" alt="Image" width="100">
+                  <?php endforeach; ?>
+                <?php endif; ?>
               </td>
               <td>
-                <a href="edit_story.php?id=<?php echo $story['id']; ?>" class="btn btn-primary">Edit</a>
-                <a href="add_images.php?id=<?php echo $story['id']; ?>" class="btn btn-primary">Add Images</a>
+                <a href="user_edit_story.php?id=<?php echo $story['id']; ?>" class="btn btn-primary">Edit</a>
+                <a href="user_add_images.php?id=<?php echo $story['id']; ?>" class="btn btn-primary">Add Images</a>
               </td>
             </tr>
           <?php endforeach; ?>
         </tbody>
-      </table>   
+      </table>
+    </div>
+  </div>
+</div>
+
 <?php include 'includes/footer.php';?>

@@ -21,6 +21,8 @@
                 <div class="card-body">
                     <h5 class="card-title"><a class="text-decoration-none" href="singlestory.php?id=<?php echo $story['id']; ?>"><?php echo $story['title']; ?></a></h5>
                     <p class="card-text">by <?php echo $story['author']; ?></p>
+                    <p class="card-text"><?php echo $story['location']; ?></p>
+                    <p class="card-text"><?php echo $story['category']; ?></p>
                     <p class="card-text"><?php echo $story['excerpt']; ?>...</p>
                 </div>
                 <div class="card-footer">

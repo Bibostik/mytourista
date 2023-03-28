@@ -68,7 +68,7 @@ if (!isset($_GET['id'])) {
 $story_id = $_GET['id'];
 
 // query the database for the story with the given ID
-$query = "SELECT title, author, thumbnail, description FROM stories WHERE id = $story_id";
+$query = "SELECT title, author, thumbnail, description, images FROM stories WHERE id = $story_id";
 $result = mysqli_query($conn, $query);
 
 // check if the story exists
@@ -83,18 +83,31 @@ $story = mysqli_fetch_assoc($result);
 
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                 <h1><?php echo $story['title']; ?></h1>
-                <p>by <?php echo $story['author']; ?></p>
-                <?php if ($story['thumbnail']): ?>
-                <img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>">
-                <?php endif; ?>
-                <p><?php echo $story['description']; ?></p>
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h1><?php echo $story['title']; ?></h1>
+            <p>by <?php echo $story['author']; ?></p>
+            <?php if ($story['thumbnail']): ?>
+            <img src="<?php echo $story['thumbnail']; ?>" alt="<?php echo $story['title']; ?>" class="img-thumbnail">
+            <?php endif; ?>
+            <?php if ($story['images']): ?>
+            <div class="row mt-4">
+                <?php foreach (explode(',', $story['images']) as $image): ?>
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="<?php echo $image; ?>" alt="<?php echo $story['title']; ?>">
+                    </div>
+                </div>
+                <?php endforeach; ?>
             </div>
+            <?php endif; ?>
+            <p><?php echo $story['description']; ?></p>
         </div>
     </div>
+</div>
+
+
 
     
 
