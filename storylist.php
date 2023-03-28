@@ -12,9 +12,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 // connect to the database
 require_once 'config.php';
 
-// connect to the database
-require_once 'config.php';
-
 $username = $_SESSION['username'];
 $user_type = $_SESSION['user_type'];
 

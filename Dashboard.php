@@ -160,8 +160,8 @@ mysqli_close($conn);
                 <?php endif; ?>
               </td>
               <td>
-                <a href="user_edit_story.php?id=<?php echo $story['id']; ?>" class="btn btn-primary">Edit</a>
-                <a href="user_add_images.php?id=<?php echo $story['id']; ?>" class="btn btn-primary">Add Images</a>
+                <a href="user_edit_story.php?id=<?php echo $story['id']; ?>" class="btn btn-primary btn-sm btn-block">Edit</a>
+                <a href="user_add_images.php?id=<?php echo $story['id']; ?>" class="btn btn-primary btn-sm btn-block">Add Images</a>
               </td>
             </tr>
           <?php endforeach; ?>

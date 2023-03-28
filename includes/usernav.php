@@ -48,6 +48,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESS
                     Welcome <?php echo $username; ?>!
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
                     <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                 </ul>
             </li>
@@ -61,7 +62,6 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESS
         </div>
     </div>
 </nav>
-
 </section>
 
 

@@ -1,4 +1,44 @@
 <?php
+// Start the session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // If not, redirect to the login page
+    header("Location: login.php");
+    exit;
+}
+
+// connect to the database
+require_once 'config.php';
+
+$username = $_SESSION['username'];
+$user_type = $_SESSION['user_type'];
+
+if ($user_type === 'storyseeker') {
+    $table_name = 'storyseekers';
+} elseif ($user_type === 'storyteller') {
+    $table_name = 'storytellers';
+}
+// Retrieve the user's information from the database
+$query = "SELECT * FROM $table_name WHERE username = ?";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "s", $username);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+
+}
+
+
+
+
+
+?>
+
+<?php
 // connect to the database
 require_once 'config.php';
 
@@ -33,6 +73,10 @@ $result = mysqli_query($conn, $story_query);
 $story = mysqli_fetch_assoc($result);
 ?>
 
+<!DOCTYPE html>
+
+<?php include 'includes/usernav.php';?>
+
 <div class="container my-5">
   <div class="row">
     <div class="col">
@@ -59,3 +103,8 @@ $story = mysqli_fetch_assoc($result);
     </div>
   </div>
 </div>
+
+
+
+
+<?php include 'includes/footer.php';?>
